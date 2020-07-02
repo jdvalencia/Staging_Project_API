@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AppUserRepository extends CrudRepository<AppUser, Integer> {
+
+    public AppUser findAppUserByUsernameAndPassword(String username, String password);
 }
