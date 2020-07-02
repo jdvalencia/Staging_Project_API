@@ -26,4 +26,9 @@ public class EventsController {
     public EventDTO saveEvent(@RequestBody Event event){
         return eventService.saveEvent(event);
     }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteEvent(@PathVariable int id) {
+        return eventService.deleteEvent(id);
+    }
 }
