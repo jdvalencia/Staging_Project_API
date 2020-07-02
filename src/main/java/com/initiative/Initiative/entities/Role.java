@@ -16,6 +16,6 @@ public enum Role {
                 return role;
             }
         }
-        return LOCKED;
+        return USER;
     }
 }

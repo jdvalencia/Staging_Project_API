@@ -19,8 +19,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public AppUser saveUser(@RequestBody AppUser user) {
-        return userService.saveAppUser(user);
+    public Principal saveUser(@RequestBody AppUser user, HttpServletResponse resp) {
+        Principal payload = userService.saveAppUser(user);
+        resp.setHeader(JwtConfig.HEADER, TokenGenerator.createJwt(payload));
+        return payload;
     }
 
     @PostMapping("/auth")

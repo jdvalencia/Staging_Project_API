@@ -29,7 +29,7 @@ public class UserService {
         return new Principal(user);
     }
 
-    public AppUser saveAppUser(AppUser user) {
+    public Principal saveAppUser(AppUser user) {
         AppUser persisted;
         try {
              persisted = userRepository.save(user);
@@ -37,7 +37,7 @@ public class UserService {
         catch (PersistenceException e) {
             throw new BadRequestException();
         }
-        return persisted;
+        return new Principal(persisted);
 
     }
 }
