@@ -29,16 +29,59 @@ public class AppUser {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "appUser")
     private List<Event> events;
 
-    public AppUser(int id, @NotBlank String username, @NotBlank String password, List<Event> events) {
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public AppUser(int id, @NotBlank String username, @NotBlank String password, List<Event> events, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.events = events;
+        this.role = role;
     }
 
-    public AppUser(@NotBlank String username, @NotBlank String password, List<Event> events) {
+    public AppUser(@NotBlank String username, @NotBlank String password, List<Event> events, Role role) {
         this.username = username;
         this.password = password;
         this.events = events;
+        this.role = role;
+    }
+
+    public AppUser(@NotBlank String username, @NotBlank String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -19,143 +19,24 @@ public class EventDTO {
 
     public EventDTO(Event event){
         String hours,minutes;
+        String hoursArray[] = {"","one","two","three","four","five","six","seven","eight", "nine", "ten", "eleven", "twelve"};
+        String minutesArray[] = {"o'clock", hoursArray[1], hoursArray[2], hoursArray[3], hoursArray[4], hoursArray[5], hoursArray[6], hoursArray[7],
+                hoursArray[8], hoursArray[9], hoursArray[10], hoursArray[11], hoursArray[12], "thirteen", "fourteen", "quarter", "sixteen", "seventeen",
+                "eighteen","nineteen", "twenty", "twenty " + hoursArray[1], "twenty " + hoursArray[2], "twenty " + hoursArray[3], "twenty " + hoursArray[4],
+                "twenty " + hoursArray[5], "twenty " + hoursArray[6], "twenty " + hoursArray[7], "twenty " + hoursArray[8], "twenty " + hoursArray[9], "half"};
         this.id = event.getId();
         this.name = event.getName();
         this.location = event.getLocation();
         this.date= event.getDate();
 
         if(event.getMinutes() <= 30) {
-            switch (event.getHours()){
-                case 2:
-                    hours = "two";
-                    break;
-                case 3:
-                    hours = "three";
-                    break;
-                case 4:
-                    hours = "four";
-                    break;
-                case 5:
-                    hours = "five";
-                    break;
-                case 6:
-                    hours = "six";
-                    break;
-                case 7:
-                    hours = "seven";
-                    break;
-                case 8:
-                    hours = "eight";
-                    break;
-                case 9:
-                    hours = "nine";
-                    break;
-                case 10:
-                    hours = "ten";
-                    break;
-                case 11:
-                    hours = "eleven";
-                    break;
-                case 12:
-                    hours = "twelve";
-                    break;
-                default:
-                    hours = "one";
+            int hourNumber = event.getHours();
+            if(hourNumber > 12) {
+                hourNumber -= 12;
             }
-            switch (event.getMinutes()) {
-                case 1:
-                    minutes = "one";
-                    break;
-                case 2:
-                    minutes = "two";
-                    break;
-                case 3:
-                    minutes = "three";
-                    break;
-                case 4:
-                    minutes = "four";
-                    break;
-                case 5:
-                    minutes = "five";
-                    break;
-                case 6:
-                    minutes = "six";
-                    break;
-                case 7:
-                    minutes = "seven";
-                    break;
-                case 8:
-                    minutes = "eight";
-                    break;
-                case 9:
-                    minutes = "nine";
-                    break;
-                case 10:
-                    minutes = "ten";
-                    break;
-                case 11:
-                    minutes = "eleven";
-                    break;
-                case 12:
-                    minutes = "twelve";
-                    break;
-                case 13:
-                    minutes = "thirteen";
-                    break;
-                case 14:
-                    minutes = "fourteen";
-                    break;
-                case 15:
-                    minutes = "quarter";
-                    break;
-                case 16:
-                    minutes = "sixteen";
-                    break;
-                case 17:
-                    minutes = "seventeen";
-                    break;
-                case 18:
-                    minutes = "eigthteen";
-                    break;
-                case 19:
-                    minutes = "nineteen";
-                    break;
-                case 20:
-                    minutes = "twenty";
-                    break;
-                case 21:
-                    minutes = "twenty one";
-                    break;
-                case 22:
-                    minutes = "twenty two";
-                    break;
-                case 23:
-                    minutes = "twenty three";
-                    break;
-                case 24:
-                    minutes = "twenty four";
-                    break;
-                case 25:
-                    minutes = "twenty five";
-                    break;
-                case 26:
-                    minutes = "twenty six";
-                    break;
-                case 27:
-                    minutes = "twenty seven";
-                    break;
-                case 28:
-                    minutes = "twenty eight";
-                    break;
-                case 29:
-                    minutes = "twenty nine";
-                    break;
-                case 30:
-                    minutes = "half";
-                    break;
-                default:
-                    minutes = "o'clock";
-            }
+
+            hours = hoursArray[hourNumber];
+            minutes = minutesArray[event.getMinutes()];
             if (event.getMinutes() == 0) {
                 this.time = hours + " " + minutes;
             } else if (event.getMinutes() == 1) {
@@ -169,139 +50,18 @@ public class EventDTO {
             }
         }
         else if(event.getMinutes() > 30){
-            int hoursTo = event.getHours() + 1;
-            switch (hoursTo){
-                case 2:
-                    hours = "two";
-                    break;
-                case 3:
-                    hours = "three";
-                    break;
-                case 4:
-                    hours = "four";
-                    break;
-                case 5:
-                    hours = "five";
-                    break;
-                case 6:
-                    hours = "six";
-                    break;
-                case 7:
-                    hours = "seven";
-                    break;
-                case 8:
-                    hours = "eight";
-                    break;
-                case 9:
-                    hours = "nine";
-                    break;
-                case 10:
-                    hours = "ten";
-                    break;
-                case 11:
-                    hours = "eleven";
-                    break;
-                case 12:
-                    hours = "twelve";
-                    break;
-                default:
-                    hours = "one";
+            int hourNumber = event.getHours();
+            if(event.getHours() > 12) {
+                hourNumber = event.getHours() - 12;
             }
+            int hoursTo = hourNumber + 1;
+            if(hoursTo == hoursArray.length){
+                hoursTo = 1;
+            }
+            System.out.println(event.toString());
+            hours = hoursArray[hoursTo];
             int minutesTo = 60 - event.getMinutes();
-            switch (minutesTo) {
-                case 1:
-                    minutes = "one";
-                    break;
-                case 2:
-                    minutes = "two";
-                    break;
-                case 3:
-                    minutes = "three";
-                    break;
-                case 4:
-                    minutes = "four";
-                    break;
-                case 5:
-                    minutes = "five";
-                    break;
-                case 6:
-                    minutes = "six";
-                    break;
-                case 7:
-                    minutes = "seven";
-                    break;
-                case 8:
-                    minutes = "eight";
-                    break;
-                case 9:
-                    minutes = "nine";
-                    break;
-                case 10:
-                    minutes = "ten";
-                    break;
-                case 11:
-                    minutes = "eleven";
-                    break;
-                case 12:
-                    minutes = "twelve";
-                    break;
-                case 13:
-                    minutes = "thirteen";
-                    break;
-                case 14:
-                    minutes = "fourteen";
-                    break;
-                case 15:
-                    minutes = "quarter";
-                    break;
-                case 16:
-                    minutes = "sixteen";
-                    break;
-                case 17:
-                    minutes = "seventeen";
-                    break;
-                case 18:
-                    minutes = "eigthteen";
-                    break;
-                case 19:
-                    minutes = "nineteen";
-                    break;
-                case 20:
-                    minutes = "twenty";
-                    break;
-                case 21:
-                    minutes = "twenty one";
-                    break;
-                case 22:
-                    minutes = "twenty two";
-                    break;
-                case 23:
-                    minutes = "twenty three";
-                    break;
-                case 24:
-                    minutes = "twenty four";
-                    break;
-                case 25:
-                    minutes = "twenty five";
-                    break;
-                case 26:
-                    minutes = "twenty six";
-                    break;
-                case 27:
-                    minutes = "twenty seven";
-                    break;
-                case 28:
-                    minutes = "twenty eight";
-                    break;
-                case 29:
-                    minutes = "twenty nine";
-                    break;
-                case 30:
-                    minutes = "half";
-                    break;
-                default:
-                    minutes = "o'clock";
-            }
+            minutes = minutesArray[minutesTo];
             this.time = minutes + " to " + hours;
         }
     }
