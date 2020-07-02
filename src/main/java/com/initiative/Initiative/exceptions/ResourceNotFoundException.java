@@ -1,20 +1,20 @@
 package com.initiative.Initiative.exceptions;
 
-public class RequestNotFoundException extends ControllerException {
+public class ResourceNotFoundException extends ControllerException {
 
-    public RequestNotFoundException() {
-        super("An invalid request was made!", 400);
+    public ResourceNotFoundException() {
+        super("Resource was not found!", 404);
     }
 
-    public RequestNotFoundException(String message) {
-        super(message, 400);
+    public ResourceNotFoundException(String message) {
+        super(message, 404);
     }
 
-    public RequestNotFoundException(String message, Throwable cause) {
-        super(message, cause, 400);
+    public ResourceNotFoundException(String message, Throwable cause) {
+        super(message, cause, 404);
     }
 
-    public RequestNotFoundException(Throwable cause) {
-        super(cause, 400);
+    public ResourceNotFoundException(Throwable cause) {
+        super(cause, 404);
     }
 }
