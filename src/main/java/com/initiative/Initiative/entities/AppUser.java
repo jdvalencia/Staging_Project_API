@@ -6,12 +6,12 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor
 public class AppUser {
 
     @Id
@@ -38,11 +38,18 @@ public class AppUser {
     @NotBlank
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "appUser")
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "appUser")
     private List<Event> events;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public AppUser() {
+    }
+
+    public AppUser(int id) {
+        this.id = id;
+    }
 
     public AppUser(@NotBlank String firstName, @NotBlank String lastName, @NotBlank String email, @NotBlank String username, @NotBlank String password, Role role) {
         this.firstName = firstName;
@@ -57,6 +64,17 @@ public class AppUser {
             this.role = role;
         }
 
+    }
+
+    public AppUser(int id, @NotBlank String firstName, @NotBlank String lastName, @NotBlank String email, @NotBlank String username, @NotBlank String password, List<Event> events, Role role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.events = events;
+        this.role = role;
     }
 
     public AppUser(int id, @NotBlank String username, @NotBlank String password, List<Event> events, Role role) {
@@ -78,6 +96,12 @@ public class AppUser {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public void addEvent(Event newEvent) {
+        if (events == null) events = new ArrayList<>();
+        newEvent.setAppUser(this);
+        events.add(newEvent);
     }
 
     public int getId() {
@@ -134,5 +158,13 @@ public class AppUser {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

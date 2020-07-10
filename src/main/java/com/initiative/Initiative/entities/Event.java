@@ -1,6 +1,8 @@
 package com.initiative.Initiative.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.initiative.Initiative.DTO.EventDTO;
+import com.initiative.Initiative.DTO.SaveEventDTO;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -32,11 +34,19 @@ public class Event {
     private int minutes;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(nullable = false)
     @JsonIgnore
     private AppUser appUser;
 
     public Event() {
+    }
+
+    public Event(SaveEventDTO saveEventDTO) {
+        this.name = saveEventDTO.getName();
+        this.location = saveEventDTO.getLocation();
+        this.date = saveEventDTO.getDate();
+        this.hours = saveEventDTO.getHours();
+        this.minutes = saveEventDTO.getMinutes();
     }
 
     public Event(int id, String name, String location, String date, int hours, int minutes, AppUser appUser) {
@@ -113,4 +123,15 @@ public class Event {
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public Event setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+        return this;
+    }
+
+
 }

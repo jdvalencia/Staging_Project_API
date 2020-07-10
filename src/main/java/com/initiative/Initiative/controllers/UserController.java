@@ -5,6 +5,7 @@ import com.initiative.Initiative.DTO.Principal;
 import com.initiative.Initiative.config.JwtConfig;
 import com.initiative.Initiative.config.TokenGenerator;
 import com.initiative.Initiative.entities.AppUser;
+import com.initiative.Initiative.entities.Role;
 import com.initiative.Initiative.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

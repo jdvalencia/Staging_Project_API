@@ -6,16 +6,20 @@ public enum Role {
 
     private final String roleName;
 
+    public String getRoleName() {
+        return roleName;
+    }
+
     Role(String roleName) {
         this.roleName = roleName;
     }
 
     public static Role getByName(String name) {
         for (Role role: Role.values()) {
-            if(role.roleName.equals(name)) {
+            if(role.roleName.equalsIgnoreCase(name)) {
                 return role;
             }
         }
-        return USER;
+        return LOCKED;
     }
 }

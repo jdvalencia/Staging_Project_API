@@ -1,6 +1,7 @@
 package com.initiative.Initiative.util;
 
 import com.initiative.Initiative.DTO.ErrorResponse;
+import com.initiative.Initiative.exceptions.AuthorizationException;
 import com.initiative.Initiative.exceptions.BadRequestException;
 import com.initiative.Initiative.exceptions.ControllerException;
 import com.initiative.Initiative.exceptions.ResourceNotFoundException;
@@ -23,6 +24,9 @@ public class ControllerAdvisor {
         }
         else if(e instanceof ResourceNotFoundException) {
             resp.setStatus(404);
+        }
+        else if(e instanceof AuthorizationException) {
+            resp.setStatus(403);
         }
 
         return err;

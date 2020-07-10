@@ -3,6 +3,7 @@ package com.initiative.Initiative.services;
 import com.initiative.Initiative.DTO.Credentials;
 import com.initiative.Initiative.DTO.Principal;
 import com.initiative.Initiative.entities.AppUser;
+import com.initiative.Initiative.entities.Role;
 import com.initiative.Initiative.exceptions.BadRequestException;
 import com.initiative.Initiative.exceptions.ResourceNotFoundException;
 import com.initiative.Initiative.repositories.AppUserRepository;
@@ -32,6 +33,9 @@ public class UserService {
     public Principal saveAppUser(AppUser user) {
         AppUser persisted;
         try {
+            if(user.getRole() == null) {
+                user.setRole(Role.USER);
+            }
              persisted = userRepository.save(user);
         }
         catch (PersistenceException e) {
